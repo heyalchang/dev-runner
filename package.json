@@ -1,0 +1,42 @@
+{
+  "name": "dev-runner",
+  "version": "1.0.0",
+  "description": "A lightweight dev server runner for your projects",
+  "main": "main.js",
+  "scripts": {
+    "dev": "concurrently \"vite\" \"wait-on http://localhost:3050 && cross-env NODE_ENV=development electron .\"",
+    "build": "tsc && vite build && electron-builder",
+    "preview": "vite preview",
+    "electron": "electron .",
+    "vite": "vite"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@radix-ui/react-slot": "^1.0.2",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
+    "electron": "^29.0.0",
+    "lucide-react": "^0.321.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwind-merge": "^2.2.1",
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.5",
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.17",
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "electron-builder": "^24.9.1",
+    "postcss": "^8.4.33",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.12",
+    "wait-on": "^7.2.0"
+  }
+}

@@ -1,0 +1,20 @@
+[
+  { 
+    "name": "LogPanel",
+    "path": "/Users/alchang/dev/logpanel",
+    "cmd": "npm run dev",
+    "preferredPort": 5173
+  },
+  { 
+    "name": "Blood Test Tracker",
+    "path": "/Users/alchang/dev/bloodtestproj",
+    "cmd": "npm run dev",
+    "preferredPort": 3000
+  },
+  { 
+    "name": "LibreChat Backend",
+    "path": "/Users/alchang/dev/LibreChat",
+    "cmd": "npm run backend:dev",
+    "preferredPort": 3080
+  }
+]
