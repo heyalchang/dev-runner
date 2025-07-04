@@ -64,7 +64,7 @@ Detection algorithm (run when user selects a directory):
    • **bun.lockb** → `cmd: "bun run dev"`
    • **pnpm-lock.yaml** → `cmd: "pnpm run dev"`
    • **yarn.lock** → `cmd: "yarn dev"`
-   • **package.json** – `scripts.dev` → `npm run dev` (or Bun/Yarn based on lockfile) else `npm start`
+   • **package.json** – `scripts.dev` → `bun run dev` (or Yarn based on lockfile) else `bun start`
    • **Cargo.toml** → `cmd: "cargo run"`
 3. Set `type` accordingly, leave `preferredPort` empty.
 4. Present a confirmation dialog; user may tweak before save.
@@ -125,7 +125,7 @@ npx dev-runner stop  <path|all>
 npx dev-runner list
 ```
 
-It re-uses the same modules as the Electron main process—no separate npm package required.
+It re-uses the same modules as the Electron main process—no separate package required.
 
 ---
 

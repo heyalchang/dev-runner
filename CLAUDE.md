@@ -1,28 +1,64 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code (claude.ai/code) and other LLMs when working with code in this repository.
 
-## Overview
+## DEV_RUNNER 2.0 - Phase 2
 
-Dev Runner is an Electron desktop application that serves as a centralized control panel for managing multiple Node.js development servers. It provides a GUI where developers can start, stop, and restart different projects from one interface, automatically detects and displays the port numbers each server is running on, and monitors server output to know when they're ready.
+**IMPORTANT: We are now implementing DEV_RUNNER version 2. The existing codebase is legacy and should be used only as reference.**
 
-## Development Commands
+### Current Status
+- **Version**: DEV_RUNNER 2.0
+- **Phase**: Phase 2 - LLM Role Assignment
+- **Legacy Code**: The v1 codebase described below is for reference only
+
+### Phase 2 Overview
+We are currently in Phase 2 of the DEV_RUNNER 2.0 implementation. In this phase:
+- LLMs are being assigned specific roles
+- Each LLM will reference this CLAUDE.md file for context
+- The architecture is being redesigned from the ground up
+
+## DEV_RUNNER 2.0 Architecture
+
+### Technology Stack (v2)
+- **Runtime**: Bun (replacing Node.js)
+- **Backend**: To be determined based on requirements
+- **Frontend**: To be determined based on requirements
+- **Build System**: To be determined based on requirements
+
+### Key Differences from v1
+- Complete rewrite using modern architecture
+- Bun-based for improved performance
+- LLM-assisted development workflow
+- Enhanced modularity and extensibility
+
+### Development Approach
+- Phase-based implementation
+- LLM role assignment for different components
+- Test-driven development with Bun's built-in test runner
+
+---
+
+## Legacy v1 Overview (Reference Only)
+
+Dev Runner v1 was an Electron desktop application that served as a centralized control panel for managing multiple Node.js development servers. It provided a GUI where developers could start, stop, and restart different projects from one interface, automatically detected and displayed the port numbers each server was running on, and monitored server output to know when they're ready.
+
+## Legacy v1 Development Commands (Reference)
 
 ```bash
 # Install dependencies
-npm install
+bun install
 
 # Run in development mode (starts Vite dev server on port 3050 + Electron)
-npm run dev
+bun run dev
 
 # Build the application
-npm run build
+bun run build
 
 # Preview Vite build
-npm run preview
+bun run preview
 ```
 
-## Architecture
+## Legacy v1 Architecture (Reference)
 
 ### Technology Stack
 - **Frontend**: React 18.2.0 + TypeScript 5.3.3 + Tailwind CSS 3.4.1
@@ -119,7 +155,7 @@ The app uses a dual approach for port detection:
 - **Health Monitoring**: Regular checks for dead processes
 - **Error Handling**: Displays error messages when servers fail to start
 
-## Configuration
+## Legacy v1 Configuration (Reference)
 
 ### Adding New Projects
 
@@ -129,7 +165,7 @@ Edit `projects.json` to add new projects:
 {
   "name": "Project Name",
   "path": "/absolute/path/to/project",
-  "cmd": "npm run dev"
+  "cmd": "bun run dev"
 }
 ```
 
@@ -138,7 +174,7 @@ Edit `projects.json` to add new projects:
 - Blood Test Tracker: `/Users/alchang/dev/bloodtestproj`
 - LibreChat Backend: `/Users/alchang/dev/LibreChat`
 
-## Development Notes
+## Legacy v1 Development Notes (Reference)
 
 - The app runs on port 3050 in development mode (configured in `package.json`)
 - No linting or testing framework is currently configured
@@ -147,13 +183,13 @@ Edit `projects.json` to add new projects:
 - The app uses Electron's context isolation for security
 - Node integration is disabled in the renderer process for security
 
-## Build Process
+## Legacy v1 Build Process (Reference)
 
 - **Development**: Uses `concurrently` to run Vite dev server and Electron with hot reload
 - **Production**: Uses `electron-builder` to package the application
 - **Cross-platform**: Uses `cross-env` for environment variables
 
-## Potential Improvements
+## Legacy v1 Potential Improvements (Reference)
 
 - Add testing framework (Jest, Vitest, or Testing Library)
 - Add ESLint configuration for code quality
