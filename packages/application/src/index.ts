@@ -9,3 +9,4 @@ export * from './services/runnerService';
 export * from './services/workspaceService';
 export * from './services/logService';
 export * from './services/heartbeatService';
+export * from './eventBus';
