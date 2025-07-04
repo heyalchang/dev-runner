@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "types": ["bun-types"],
+    "noEmit": false,
+    "emitDeclarationOnly": true
+  },
+  "include": ["src/**/*", "src/**/*.json"],
+  "exclude": ["node_modules", "dist", "test"]
+}

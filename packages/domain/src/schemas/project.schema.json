@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/devrunner.schema.json",
+  "title": "Dev Runner project config",
+  "type": "object",
+  "required": ["cmd"],
+  "properties": {
+    "name":                { "type": "string",  "minLength": 1 },
+    "cmd":                 { "type": "string",  "minLength": 1 },
+    "preferredPort":       { "type": "integer", "minimum": 1,      "maximum": 65535 },
+    "env":                 { "type": "object",  "additionalProperties": { "type": "string" } },
+    "heartbeat":           { "enum": ["tcp", "http"], "default": "tcp" },
+    "healthPath":          { "type": "string" },
+    "interval":            { "type": "integer", "minimum": 5 },
+    "grace":               { "type": "integer", "minimum": 1 },
+    "restartOnUnhealthy":  { "type": "boolean" },
+    "readyRegex":          { "type": "string" },
+    "portArg":             { "type": "string" },
+    "type": {
+      "enum": ["vite", "cra", "next", "bun", "cargo", "custom"]
+    }
+  },
+  "additionalProperties": false
+}

@@ -9,7 +9,7 @@ Bun.serve({
   port: PORT,
   async fetch(req) {
     const url = new URL(req.url);
-    let path = url.pathname;
+    const path = url.pathname;
 
     // Serve index.html for root path
     if (path === "/") {

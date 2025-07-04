@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/workspace.schema.json",
+  "title": "Dev Runner workspace file",
+  "type": "object",
+  "required": ["version", "entries"],
+  "properties": {
+    "version": { "const": 1 },
+    "entries": {
+      "type": "array",
+      "items": { "type": "string", "format": "uri" }
+    }
+  },
+  "additionalProperties": false
+}

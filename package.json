@@ -1,18 +1,24 @@
 {
   "name": "dev-runner",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A lightweight dev server runner for your projects",
   "main": "main.js",
+  "workspaces": ["packages/*"],
   "scripts": {
     "dev": "concurrently \"bun run dev:server\" \"wait-on http://localhost:3050 && cross-env NODE_ENV=development electron .\"",
     "dev:server": "bun run build:dev && bun run build:css && bun ./server.ts",
-    "build": "tsc && bun run build:prod && electron-builder",
+    "build": "bun run build:packages && tsc && bun run build:prod && electron-builder",
+    "build:packages": "bun run build -r",
     "build:dev": "bun build ./src/main.tsx --outdir ./dist --target browser --splitting",
     "build:prod": "NODE_ENV=production bun build ./src/main.tsx --outdir ./dist --target browser --splitting --minify",
     "build:css": "bun ./build-css.js",
     "serve": "bun ./server.ts",
     "preview": "bun run serve",
-    "electron": "electron ."
+    "electron": "electron .",
+    "typecheck": "tsc --noEmit",
+    "lint": "bunx eslint . --ext .ts,.tsx",
+    "test": "bun test --coverage",
+    "ci": "bun run typecheck && bun run lint && bun run test"
   },
   "keywords": [],
   "author": "",
@@ -33,13 +39,22 @@
     "@types/node": "^20.11.5",
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
     "autoprefixer": "^10.4.17",
     "concurrently": "^8.2.2",
     "cross-env": "^7.0.3",
     "electron-builder": "^24.9.1",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-boundaries": "^4.2.0",
+    "husky": "^9.0.0",
+    "lint-staged": "^15.2.0",
     "postcss": "^8.4.33",
+    "prettier": "^3.2.0",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3",
     "wait-on": "^7.2.0"
-  }
+  },
+  "private": true
 }

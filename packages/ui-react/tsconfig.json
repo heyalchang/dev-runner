@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "jsx": "react-jsx",
+    "types": ["bun-types"],
+    "noEmit": false,
+    "emitDeclarationOnly": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "test"],
+  "references": [
+    { "path": "../domain" },
+    { "path": "../application" },
+    { "path": "../infrastructure" }
+  ]
+}

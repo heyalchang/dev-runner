@@ -1,0 +1,23 @@
+{
+  "name": "@dev-runner/infrastructure",
+  "version": "2.0.0",
+  "module": "src/index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "test": "bun test",
+    "lint": "bunx eslint src --ext .ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@dev-runner/domain": "workspace:*",
+    "@dev-runner/application": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}

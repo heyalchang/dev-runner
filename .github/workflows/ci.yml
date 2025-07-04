@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master, 'feat/*']
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-12, windows-latest]
+    
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Install Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+      
+      - name: Type check
+        run: bun run typecheck
+      
+      - name: Lint
+        run: bun run lint
+      
+      - name: Test
+        run: bun run test
+      
+      - name: Build packages
+        run: bun run build:packages
+      
+      - name: Check for LLM blockers
+        run: |
+          if grep -r "LLM_BLOCKER:" packages/ --include="*.ts" --include="*.tsx"; then
+            echo "::error::Found LLM_BLOCKER comments in code. Please resolve before merging."
+            exit 1
+          fi
