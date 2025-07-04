@@ -22,16 +22,32 @@ export function createHeartbeatProbe(): HeartbeatProbe {
 
   function http(url: string): Promise<boolean> {
     return new Promise(resolve => {
-      const req = request(url, res => {
-        res.resume();
-        resolve(res.statusCode !== undefined && res.statusCode < 500);
+      const { hostname, port } = new URL(url);
+      const socket = connect({ host: hostname, port: Number(port) }, () => {
+        socket.destroy();
+        const req = request(
+          url,
+          { agent: false, headers: { connection: 'close' } },
+          res => {
+            res.resume();
+            resolve(res.statusCode !== undefined && res.statusCode < 500);
+          }
+        );
+        req.once('error', () => resolve(false));
+        req.setTimeout(1000, () => {
+          req.destroy();
+          resolve(false);
+        });
+        req.end();
       });
-      req.once('error', () => resolve(false));
-      req.setTimeout(1000, () => {
-        req.destroy();
+      socket.once('error', () => {
+        socket.destroy();
         resolve(false);
       });
-      req.end();
+      socket.setTimeout(1000, () => {
+        socket.destroy();
+        resolve(false);
+      });
     });
   }
 
