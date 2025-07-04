@@ -68,7 +68,7 @@ Concrete artefacts:
 • CI gate already runs:
 
 ```
-bun run build -r && bun run lint -r && bun run test -r
+bun run build && bun run lint && bun run test
 ```
 
 ---

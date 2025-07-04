@@ -19,7 +19,7 @@ Keep it up-to-date when responsibilities or contracts change.
 • Architecture direction: `domain ← application ← infrastructure ← (ui-react | cli)`
 • Imports must never violate the arrow – `eslint-plugin-boundaries` will fail CI.
 • Testing uses Bun’s built-in runner (`bun test`). **We do not use Vitest.**
-• CI gate: `bun run build -r && bun run lint -r && bun run test -r`
+• CI gate: `bun run build && bun run lint && bun run test`
   – coverage threshold ≥ 80 % for any new non-stub code.
 • Formatting: Prettier + ESLint autofix before every commit.
 • **Diff protocol**: All file mutations *must* be wrapped in XML diff blocks.
