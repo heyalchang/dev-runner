@@ -16,7 +16,8 @@
     "@dev-runner/infrastructure": "workspace:*"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "@testing-library/react": "^14.1.2"
   },
   "peerDependencies": {
     "typescript": "^5",

@@ -25,7 +25,11 @@ export function ProjectCard({
     <div className="project-card">
       <div className="header">
         <span>{project.name ?? project.cmd}</span>
-        <span data-testid="status-dot" className={`status-${status}`}></span>
+        <span
+          data-testid="status-dot"
+          className={`status-${status}`}
+          title={status}
+        ></span>
         <button onClick={onStart}>start</button>
         <button onClick={onStop}>stop</button>
         <button onClick={() => setOpen((o) => !o)}>logs</button>
@@ -35,7 +39,10 @@ export function ProjectCard({
           {logs.map((l, idx) => (
             <pre key={idx}>{l.message}</pre>
           ))}
-          {onOpenLog && <button onClick={onOpenLog}>Open full log</button>}
+          {onOpenLog &&
+            (typeof process !== 'undefined' && process.platform !== 'win32' ? (
+              <button onClick={onOpenLog}>Open full log</button>
+            ) : null)}
         </div>
       )}
     </div>
