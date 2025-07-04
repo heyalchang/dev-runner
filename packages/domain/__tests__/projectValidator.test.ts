@@ -14,7 +14,7 @@ describe('Project validator', () => {
     expect(res.ok).toBe(false);
     if (!res.ok) {
       // At least one error pointing at preferredPort
-      const hasPortErr = res.error.some(e => e.instancePath.endsWith('/preferredPort'));
+      const hasPortErr = res.error.some((e) => e.instancePath.endsWith('/preferredPort'));
       expect(hasPortErr).toBe(true);
     }
   });
@@ -22,5 +22,21 @@ describe('Project validator', () => {
   it('rejects when cmd is missing', () => {
     const res = parseProjectConfig({ name: 'NoCmd' });
     expect(res.ok).toBe(false);
+  });
+
+  it('accepts a custom portFile path', () => {
+    const cfg = { cmd: 'npm run dev', portFile: '/tmp/devrunner-port' };
+    const res = parseProjectConfig(cfg);
+    expect(res.ok).toBe(true);
+  });
+
+  it('rejects non-string portFile', () => {
+    const cfg = { cmd: 'npm run dev', portFile: 42 } as unknown;
+    const res = parseProjectConfig(cfg);
+    expect(res.ok).toBe(false);
+    if (!res.ok) {
+      const hasErr = res.error.some((e) => e.instancePath.endsWith('/portFile'));
+      expect(hasErr).toBe(true);
+    }
   });
 });

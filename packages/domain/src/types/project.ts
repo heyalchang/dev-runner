@@ -1,13 +1,7 @@
 import type { PortNumber } from './port';
 
 export type Heartbeat = 'tcp' | 'http';
-export type FrameworkType =
-  | 'vite'
-  | 'cra'
-  | 'next'
-  | 'bun'
-  | 'cargo'
-  | 'custom';
+export type FrameworkType = 'vite' | 'cra' | 'next' | 'bun' | 'cargo' | 'custom';
 
 /**
  * In-memory representation of a single `.devrunner.json`
@@ -43,6 +37,12 @@ export interface Project {
   readyRegex?: string;
   /** CLI flag used instead of the PORT env var, e.g. "--port". */
   portArg?: string;
+  /**
+   * Optional filesystem path to a file containing the port number. When
+   * provided Dev Runner waits for this file to appear and reads the port
+   * from it instead of scanning stdout.
+   */
+  portFile?: string;
   /** Auto-detected or user-supplied framework classification. */
   type?: FrameworkType;
 }
