@@ -4,11 +4,15 @@
   "description": "A lightweight dev server runner for your projects",
   "main": "main.js",
   "scripts": {
-    "dev": "concurrently \"vite\" \"wait-on http://localhost:3050 && cross-env NODE_ENV=development electron .\"",
-    "build": "tsc && vite build && electron-builder",
-    "preview": "vite preview",
-    "electron": "electron .",
-    "vite": "vite"
+    "dev": "concurrently \"bun run dev:server\" \"wait-on http://localhost:3050 && cross-env NODE_ENV=development electron .\"",
+    "dev:server": "bun run build:dev && bun run build:css && bun ./server.ts",
+    "build": "tsc && bun run build:prod && electron-builder",
+    "build:dev": "bun build ./src/main.tsx --outdir ./dist --target browser --splitting",
+    "build:prod": "NODE_ENV=production bun build ./src/main.tsx --outdir ./dist --target browser --splitting --minify",
+    "build:css": "bun ./build-css.js",
+    "serve": "bun ./server.ts",
+    "preview": "bun run serve",
+    "electron": "electron ."
   },
   "keywords": [],
   "author": "",
@@ -25,10 +29,10 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@types/bun": "latest",
     "@types/node": "^20.11.5",
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
-    "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.17",
     "concurrently": "^8.2.2",
     "cross-env": "^7.0.3",
@@ -36,7 +40,6 @@
     "postcss": "^8.4.33",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3",
-    "vite": "^5.0.12",
     "wait-on": "^7.2.0"
   }
 }

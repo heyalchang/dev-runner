@@ -72,6 +72,7 @@ export default function useDevRunner() {
   }, []);
 
   const run = async (p: Project) => {
+    console.log('[useDevRunner] run() called with project:', p);
     setState((s) => ({
       ...s,
       [p.name]: {
@@ -81,6 +82,13 @@ export default function useDevRunner() {
       },
     }));
 
+    console.log('[useDevRunner] Calling window.devRunner.start with:', {
+      name: p.name,
+      cmd: p.cmd,
+      path: p.path,
+      preferredPort: p.preferredPort
+    });
+    
     const port = await window.devRunner.start(
       p.name,
       p.cmd,

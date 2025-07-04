@@ -83,7 +83,16 @@ app.on('activate', () => {
 });
 
 ipcMain.handle('start', async (_evt, key, cmd, cwd, preferredPort = 3000) => {
-  if (procs[key]) return procs[key].port;
+  console.log(`[START] Received request to start project:`);
+  console.log(`  - Key: ${key}`);
+  console.log(`  - Command: ${cmd}`);
+  console.log(`  - Directory: ${cwd}`);
+  console.log(`  - Preferred Port: ${preferredPort}`);
+  
+  if (procs[key]) {
+    console.log(`[START] Project ${key} is already running on port ${procs[key].port}`);
+    return procs[key].port;
+  }
   
   // Clean up any existing port file
   const portFilePath = getPortFilePath(key);
@@ -105,8 +114,25 @@ ipcMain.handle('start', async (_evt, key, cmd, cwd, preferredPort = 3000) => {
   
   // Spawn with PORT environment variable
   const env = { ...process.env, PORT: suggestedPort };
+  console.log(`[${key}] Spawning process with command: ${cmd} in directory: ${cwd}`);
+  
+  // Verify the directory exists before spawning
+  try {
+    const stats = await fs.stat(cwd);
+    if (!stats.isDirectory()) {
+      console.error(`[${key}] Error: ${cwd} is not a directory`);
+      return null;
+    }
+  } catch (e) {
+    console.error(`[${key}] Error: Directory ${cwd} does not exist`);
+    return null;
+  }
+  
   const child = spawn(cmd, { shell: true, cwd, env });
   procs[key] = { proc: child, port: null, portFilePath, pollInterval: null };
+  
+  console.log(`[${key}] Started process with PID: ${child.pid}`);
+  console.log(`[${key}] Current procs:`, Object.keys(procs));
 
   // Start polling for the port file
   procs[key].pollInterval = setInterval(async () => {

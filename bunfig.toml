@@ -1,0 +1,14 @@
+[install]
+# Use bun's package manager
+auto = "auto"
+
+[build]
+# Build configuration
+target = "browser"
+format = "esm"
+splitting = true
+sourcemap = "external"
+
+[dev]
+# Development server configuration
+port = 3050

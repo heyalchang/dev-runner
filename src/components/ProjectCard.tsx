@@ -73,7 +73,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             </>
           ) : (
             <button
-              onClick={() => run(project)}
+              onClick={() => {
+                console.log('[ProjectCard] Running project:', project);
+                run(project);
+              }}
               className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors"
             >
               Run
