@@ -1,12 +1,12 @@
 import { describe, it, expect } from 'bun:test';
-import { VERSION } from '../src/index';
+import { VERSION, useRunner } from '../src/index';
 
 describe('ui-react package', () => {
   it('should export VERSION', () => {
     expect(VERSION).toBe('2.0.0');
   });
 
-  it('should pass stub test', () => {
-    expect(true).toBe(true);
+  it('should export useRunner hook', () => {
+    expect(typeof useRunner).toBe('function');
   });
 });

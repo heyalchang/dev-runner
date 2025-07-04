@@ -1,12 +1,12 @@
 import { describe, it, expect } from 'bun:test';
-import { VERSION } from '../src/index';
+import { VERSION, runCli } from '../src/index';
 
 describe('cli package', () => {
   it('should export VERSION', () => {
     expect(VERSION).toBe('2.0.0');
   });
 
-  it('should pass stub test', () => {
-    expect(true).toBe(true);
+  it('should export runCli', () => {
+    expect(typeof runCli).toBe('function');
   });
 });
