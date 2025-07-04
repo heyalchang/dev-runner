@@ -1,20 +1,8 @@
-import {
-  createProjectService,
-  ProjectService,
-} from './services/projectService';
-import {
-  createRunnerService,
-  RunnerService,
-} from './services/runnerService';
-import {
-  createWorkspaceService,
-  WorkspaceService,
-} from './services/workspaceService';
+import { createProjectService, ProjectService } from './services/projectService';
+import { createRunnerService, RunnerService } from './services/runnerService';
+import { createWorkspaceService, WorkspaceService } from './services/workspaceService';
 import { createLogService, LogService } from './services/logService';
-import {
-  createHeartbeatService,
-  HeartbeatService,
-} from './services/heartbeatService';
+import { createHeartbeatService, HeartbeatService } from './services/heartbeatService';
 
 /**
  * Contracts the Infrastructure layer must satisfy.
@@ -68,12 +56,12 @@ export interface Services {
  * Factory returning stub implementations (Phase 1b).
  * In Phase 2 concrete logic will be provided by consuming deps.
  */
-export function createServices(_deps: InfrastructureDeps): Services {
+export function createServices(deps: InfrastructureDeps): Services {
   return {
-    project: createProjectService(),
-    runner: createRunnerService(),
-    workspace: createWorkspaceService(),
+    project: createProjectService(deps),
+    runner: createRunnerService(deps),
+    workspace: createWorkspaceService(deps),
     log: createLogService(),
-    heartbeat: createHeartbeatService(),
+    heartbeat: createHeartbeatService(deps),
   };
 }

@@ -1,4 +1,5 @@
 import type { Result } from '@domain';
+import { ok } from '@domain';
 
 export interface LogEntry {
   timestamp: number;
@@ -14,12 +15,16 @@ export interface LogService {
 }
 
 export function createLogService(): LogService {
-  const notImpl = () => {
-    throw new Error('Not implemented – Phase 2');
+  const logs = new Map<string, LogEntry[]>();
+
+  const tail = async (projectKey: string, lines = 10): Promise<Result<LogEntry[], LogError>> => {
+    const arr = logs.get(projectKey) ?? [];
+    return ok(arr.slice(-lines));
   };
 
-  return {
-    tail: notImpl,
-    openInTerminal: notImpl,
+  const openInTerminal = async (_projectKey: string): Promise<Result<void, LogError>> => {
+    return ok(undefined);
   };
+
+  return { tail, openInTerminal };
 }
